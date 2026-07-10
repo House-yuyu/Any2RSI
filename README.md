@@ -16,7 +16,6 @@ This is the official PyTorch implementation for our paper:
 - **VLM-Empowered Enriched Description Generation.** EDG enriches coarse remote-sensing captions with objects, layouts, relationships, scene context, and visual attributes.
 - **Cross-Modal Multi-Control Adapter.** CMMCA aligns enriched text with multi-level visual control tokens and produces four query feature levels for spatial injection.
 - **Prompt-Guided Optimization.** PGO applies a differentiable CLIP image-text objective to improve semantic consistency between generated images and descriptions.
-- **Complete research pipeline.** The repository provides data preparation, control extraction, training, resume, adapter export, single/batch inference, and evaluation tools.
 
 ## :hammer_and_wrench: Environment
 
