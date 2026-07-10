@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "any2rsi"
+version = "0.1.0"
+description = "Official implementation of Any2RSI controllable remote-sensing text-to-image generation"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Xu Zhang"},
+]
+keywords = ["remote-sensing", "diffusion", "text-to-image", "controllable-generation"]
+classifiers = [
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3.10",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "numpy>=1.24,<2",
+  "omegaconf>=2.3,<3",
+  "Pillow>=9.5",
+  "torch>=2.0",
+]
+
+[project.urls]
+Paper = "https://ojs.aaai.org/index.php/AAAI/article/view/38283"
+Repository = "https://github.com/House-yuyu/Any2RSI"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+# CLI entrypoints intentionally adjust sys.path before importing the pinned
+# AnyControl checkout, so E402 is expected in those files.
+ignore = ["E402", "E501"]

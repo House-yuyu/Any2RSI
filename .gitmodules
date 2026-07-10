@@ -1,0 +1,4 @@
+[submodule "third_party/AnyControl"]
+	path = third_party/AnyControl
+	url = https://github.com/open-mmlab/AnyControl.git
+	ignore = untracked

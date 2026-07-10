@@ -1,0 +1,6 @@
+# Optional enriched-description backends.
+transformers==4.51.3
+accelerate==1.12.0
+qwen-vl-utils>=0.0.8
+sentencepiece>=0.2
+openai>=1.0,<3

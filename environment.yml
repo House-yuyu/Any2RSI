@@ -1,0 +1,17 @@
+name: any2rsi
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip>=24
+  - pytorch=2.4.1
+  - torchvision=0.19.1
+  - pytorch-cuda=12.1
+  - ninja
+  - cmake
+  - gcc_linux-64=11
+  - gxx_linux-64=11
+  - pip:
+      - -r requirements/base.txt

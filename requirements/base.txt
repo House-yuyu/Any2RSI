@@ -1,0 +1,23 @@
+# Versions used by the validated RTX 4090 environment. Install PyTorch from the
+# wheel/conda channel matching your CUDA runtime before this file when needed.
+torch==2.4.1
+torchvision==0.19.1
+pytorch-lightning==2.5.1
+transformers==4.51.3
+accelerate==1.12.0
+diffusers==0.30.3
+huggingface-hub==0.36.0
+safetensors==0.4.5
+omegaconf==2.3.0
+numpy==1.24.4
+Pillow==12.1.0
+scipy==1.15.3
+scikit-image==0.24.0
+scikit-learn==1.7.2
+opencv-python==4.6.0.66
+einops==0.8.1
+pycocotools==2.0.11
+timm==1.0.19
+ftfy==6.3.1
+regex==2025.7.34
+open-clip-torch==3.2.0

@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a reproducible implementation problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: Summary and expected behavior
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction command and minimal config
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Environment
+      description: Commit, OS, Python, PyTorch, CUDA, GPU, AnyControl commit
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Sanitized traceback or logs
+      description: Remove credentials, private paths, and restricted data.

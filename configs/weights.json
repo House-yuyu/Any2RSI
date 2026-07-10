@@ -1,0 +1,41 @@
+{
+  "anycontrol_repo": "nowsyn/anycontrol",
+  "clip_repo": "openai/clip-vit-large-patch14",
+  "files": [
+    {
+      "repo": "nowsyn/anycontrol",
+      "filename": "ckpts/init_local.ckpt",
+      "destination": "weights/anycontrol/ckpts/init_local.ckpt",
+      "size": 5913265211,
+      "sha256": "19b65ed935d792c70cf68011681d4450515a1de509082c46f8ec9c8664bf45d4"
+    },
+    {
+      "repo": "nowsyn/anycontrol",
+      "filename": "ckpts/blip2_pretrained.pth",
+      "destination": "weights/anycontrol/ckpts/blip2_pretrained.pth",
+      "size": 746998955,
+      "sha256": "f31f96e4a97ce9ac7a140ea1961b8a871822ae1cd0a23f0f1122fbefd70db9f0"
+    },
+    {
+      "repo": "nowsyn/anycontrol",
+      "filename": "annotator/ckpts/network-bsds500.pth",
+      "destination": "weights/anycontrol/annotator/ckpts/network-bsds500.pth",
+      "size": 58871680,
+      "sha256": "58a858782f5fa3e0ca3dc92e7a1a609add93987d77be3dfa54f8f8419d881a94"
+    },
+    {
+      "repo": "nowsyn/anycontrol",
+      "filename": "annotator/ckpts/CropFormer_hornet_3x_03823a.pth",
+      "destination": "weights/anycontrol/annotator/ckpts/CropFormer_hornet_3x_03823a.pth",
+      "size": 888996425,
+      "sha256": "71915b7e9dc63fc662b32c59dff513530a06221c3b22f6de7ff4d6ef82df1128"
+    },
+    {
+      "repo": "openai/clip-vit-large-patch14",
+      "filename": "model.safetensors",
+      "destination": "weights/clip-vit-large-patch14/model.safetensors",
+      "size": 1710540580,
+      "sha256": "a2bf730a0c7debf160f7a6b50b3aaf3703e7e88ac73de7a314903141db026dcb"
+    }
+  ]
+}

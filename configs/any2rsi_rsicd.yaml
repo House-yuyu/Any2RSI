@@ -1,0 +1,160 @@
+# configs/any2rsi_rsicd.yaml
+# Any2RSI training config. Uses the official AnyControl LDM, LocalAdapter and
+# LocalControlUNetModel with an Any2RSI subclass adding CMMCA + PGO.
+#
+# Backbone module paths match open-mmlab/AnyControl.
+
+model:
+  base_learning_rate: 1.0e-5
+  target: src.models.any2rsi_cldm.Any2RSIControlLDM
+  params:
+    # ---- standard LatentDiffusion / ControlLDM params ----
+    linear_start: 0.00085
+    linear_end: 0.0120
+    num_timesteps_cond: 1
+    log_every_t: 200
+    timesteps: 1000
+    first_stage_key: "jpg"
+    cond_stage_key: "txt"
+    image_size: 64
+    channels: 4
+    cond_stage_trainable: false
+    conditioning_key: crossattn
+    monitor: train/loss
+    scale_factor: 0.18215
+    use_ema: false
+
+    # ---- Any2RSI additions ----
+    control_keys: ["hint_canny", "hint_hed", "hint_seg"]
+    sd_locked: true
+
+    cmmca_config:
+      target: src.models.cmmca.CMMCA
+      params:
+        dim: 768
+        text_dim: 768
+        vision_dim: 1024
+        num_query_tokens: 256
+        num_layers: 4
+        n_heads: 8
+        out_context_dim: 768
+        qformer_init_ckpt: weights/anycontrol/ckpts/blip2_pretrained.pth
+
+    vision_encoder_config:
+      target: src.models.vision_encoder.MultiLevelVisionEncoder
+      params:
+        model_name: weights/clip-vit-large-patch14
+        layer_indices: [6, 12, 18, 24]
+        tokens_per_step: 1
+        input_size: 224
+        freeze: true
+
+    pgo_config:
+      enable: true
+      weight: 0.5
+      # The paper applies Eq. (2) throughout denoising. Lower these only when
+      # memory/throughput makes the fully faithful setting impractical.
+      prob: 1.0
+      max_t_frac: 1.0
+      gradient_checkpointing: true
+      clip_model: weights/clip-vit-large-patch14
+
+    # ---- AnyControl spatial adapter (13 zero-conv residuals) ----
+    local_control_config:
+      target: models.local_adapter.LocalAdapter
+      params:
+        in_channels: 4
+        model_channels: 320
+        local_channels: 3
+        inject_channels: [192, 256, 384, 512]
+        inject_layers: [1, 4, 7, 10]
+        query_channels: [768, 768, 768, 768]
+        query_layers: [0, 1, 2, 3]
+        query_scales: [4, 2, 1, 0.5]
+        num_res_blocks: 2
+        attention_resolutions: [4, 2, 1]
+        channel_mult: [1, 2, 4, 4]
+        use_checkpoint: false
+        num_heads: 8
+        use_spatial_transformer: true
+        transformer_depth: 1
+        context_dim: 768
+        legacy: false
+
+    # ---- SD v1.5 UNet ----
+    unet_config:
+      target: models.local_adapter.LocalControlUNetModel
+      params:
+        image_size: 32
+        in_channels: 4
+        out_channels: 4
+        model_channels: 320
+        attention_resolutions: [4, 2, 1]
+        num_res_blocks: 2
+        channel_mult: [1, 2, 4, 4]
+        num_heads: 8
+        use_spatial_transformer: true
+        transformer_depth: 1
+        context_dim: 768
+        use_checkpoint: false
+        legacy: false
+
+    # ---- VAE (frozen) ----
+    first_stage_config:
+      target: ldm.models.autoencoder.AutoencoderKL
+      params:
+        embed_dim: 4
+        monitor: val/rec_loss
+        ddconfig:
+          double_z: true
+          z_channels: 4
+          resolution: 256
+          in_channels: 3
+          out_ch: 3
+          ch: 128
+          ch_mult: [1, 2, 4, 4]
+          num_res_blocks: 2
+          attn_resolutions: []
+          dropout: 0.0
+        lossconfig:
+          target: torch.nn.Identity
+
+    # ---- CLIP text encoder (frozen) ----
+    cond_stage_config:
+      target: ldm.modules.encoders.modules.FrozenCLIPEmbedder
+      params:
+        version: weights/clip-vit-large-patch14
+
+data:
+  target: src.train.train.DataModuleFromConfig
+  params:
+    # One 512px sample + gradient accumulation 2 fits an RTX 4090 while
+    # preserving the paper's effective batch size of 2.
+    batch_size: 1
+    num_workers: 4
+    train:
+      target: src.data.rst2i_dataset.RST2IDataset
+      params:
+        images_dir: data/images
+        enriched_json: data/enriched.json
+        # Produced by scripts/prepare_controls.py. HED/seg proxies are disabled
+        # by default because they cannot reproduce the paper's control metrics.
+        controls_dir: data/conditions
+        allow_proxy_controls: false
+        control_types: ["canny", "hed", "seg"]
+        image_size: 512
+        min_controls: 1
+        max_controls: 3
+        drop_text_prob: 0.05
+        drop_all_prob: 0.05
+
+lightning:
+  trainer:
+    max_steps: 40000
+    accumulate_grad_batches: 2
+    precision: 16-mixed
+    gradient_clip_val: 1.0
+  callbacks:
+    image_logger:
+      batch_frequency: 500
+      max_images: 4

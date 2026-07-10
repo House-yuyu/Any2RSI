@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# Environments and editors
+.venv/
+venv/
+.env
+.idea/
+.vscode/
+*.swp
+
+# Training and generated artifacts
+logs/
+outputs/
+checkpoints/
+lightning_logs/
+wandb/
+*.ckpt
+*.pth
+*.pt
+*.bin
+*.safetensors
+
+# Large or restricted local assets
+weights/*
+!weights/README.md
+data/*
+!data/README.md
+smoke_data/
+xrst2i_subset/
+
+# Native extension build products
+third_party/AnyControl/annotator/entityseg/**/build/
+third_party/AnyControl/annotator/entityseg/**/*.egg-info/
+
+# OS files
+.DS_Store
+Thumbs.db
