@@ -26,7 +26,6 @@ Linux
 Python 3.10
 PyTorch 2.4.1
 CUDA 12.1
-24 GB GPU memory for 512x512 training with PGO
 ```
 
 Clone the repository and create the environment:
