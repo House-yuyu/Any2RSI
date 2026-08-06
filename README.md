@@ -1,12 +1,21 @@
-# :fire: Any2RSI: Controllable Remote Sensing Text-to-Image Generation via Any Control and Enriched Description (AAAI 2026)
+<div align="center">
 
-> [[Paper](https://ojs.aaai.org/index.php/AAAI/article/view/38283)] [[DOI](https://doi.org/10.1609/aaai.v40i15.38283)]
+## :fire: Any2RSI: Controllable Remote Sensing Text-to-Image Generation via Any Control and Enriched Description (AAAI 2026)
+
+[[Paper](https://ojs.aaai.org/index.php/AAAI/article/view/38283)] [[DOI](https://doi.org/10.1609/aaai.v40i15.38283)]
+
+</div>
+
+---
 
 This is the official PyTorch implementation for our paper:
 
 > **Any2RSI: Controllable Remote Sensing Text-to-Image Generation via Any Control and Enriched Description**<br>
 > [Xu Zhang](https://house-yuyu.github.io/), Jianzhong Huang, [Lefei Zhang](https://scholar.google.com.hk/citations?user=BLKHwNwAAAAJ&hl=en)<br>
 > School of Computer Science, Wuhan University
+
+
+![teaser_img](fig/model.png)
 
 :star: If Any2RSI is helpful to your research or projects, please consider starring this repository. Thank you!
 
