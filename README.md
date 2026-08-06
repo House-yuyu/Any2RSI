@@ -257,7 +257,7 @@ python scripts/evaluate.py \
 
 ## :handshake: Acknowledgements
 
-This project builds on [AnyControl](https://github.com/open-mmlab/AnyControl), Stable Diffusion v1.5, OpenAI CLIP, BLIP-2/LAVIS, HED, and EntitySeg. We thank the authors and open-source contributors for their excellent work.
+This project builds on AnyControl, Stable Diffusion v1.5, OpenAI CLIP, BLIP-2/LAVIS, HED, and EntitySeg. We thank the authors and open-source contributors for their excellent work.
 
 ## :postbox: Contact
 
