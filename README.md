@@ -118,8 +118,8 @@ The downloaded files are placed under `weights/` and linked to the corresponding
 
 The training datasets are available on Baidu Netdisk:
 
-- [RSICD_refined](https://pan.baidu.com/s/1ScJuOIxCr-aPgoDTpJeTKQ)（提取码：`3mxh`）
-- [RST2I-110K](https://pan.baidu.com/s/1aDKsJH0nDgtVU3pqgWxzYg)（提取码：`p338`）
+- [RSICD_refined](https://pan.baidu.com/s/186FyWm1WPu5EPk2cMLtccA?pwd=krfn)（提取码：`krfn`）
+- [RST2I-110K](https://pan.baidu.com/s/186FyWm1WPu5EPk2cMLtccA?pwd=krfn)（提取码：`krfn`）
 
 The training data should use the following layout:
 
